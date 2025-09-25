@@ -1,0 +1,1 @@
+Place your background music file here named 'music.mp3' inside the public folder. (Replace with an actual mp3 file.)
