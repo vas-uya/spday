@@ -558,7 +558,7 @@ This is just a small part of my love for you.`
 
         {showPopup && (
           <div className="fixed bottom-24 right-6 bg-black/80 text-white px-4 py-2 rounded-lg shadow-lg z-50">
-            ❤️ Music Started ❤️
+            ❤️ Our Music Started and I love this music  ❤️
           </div>
         )}
         {/* ------------------------------------------ */}
