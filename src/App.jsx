@@ -229,6 +229,12 @@ const TimelineCard = ({ event, index, onOpen }) => {
       >
         {event.title}
       </h3>
+
+      {/* Scrollable description area (keeps layout compact but readable) */}
+      <div className="max-h-40 overflow-y-auto mt-3 pr-2">
+        <p className="text-sm text-gray-700 whitespace-pre-line">{event.desc}</p>
+      </div>
+
       {hearts.map((h) => (
         <FloatingHeart key={h.id} x={h.x} size={h.size} emoji={h.emoji} />
       ))}
