@@ -9,6 +9,120 @@ const LOVE_EMOJIS = [
   "💜","💙","💚","🩷","💋","✨","🤗","😘","🥰","😚","😻","😍"
 ];
 
+/* ----------------------------------------------
+   SAVE MOTIVATION + POEM AS VARIABLES
+   (your text is completely unchanged)
+------------------------------------------------*/
+
+const motivationText = `
+💙 To the Strongest Girl I Know — My CA Warrior 💙
+
+I know the CA journey isn’t easy.
+It’s long… stressful… full of sleepless nights, endless revisions, pressure, and moments when it feels like the world is moving fast but you’re stuck between chapters, attempts, and expectations.
+
+But even through all of that, you’re still standing.
+You’re still fighting.
+You’re still giving your best.
+
+And I’m so proud of you.
+
+I’ve seen how hard you work, how much you sacrifice, how deeply you care about your dreams.
+Becoming a CA isn’t just a career… it’s a test of strength, discipline, and courage — and you have all of it within you.
+
+And in this journey, you are not alone.
+Because I am here — your four pillars, always.
+
+1. Pillar of Support
+
+Whenever you feel tired, stressed, or overwhelmed, lean on me.
+I’ll hold you up.
+I’ll make sure you never feel like giving up.
+
+2. Pillar of Strength
+
+When the syllabus feels endless or results shake your confidence, I’ll be the one reminding you of your power — the strength you sometimes forget you have.
+
+3. Pillar of Peace
+
+In the chaos of books, classes, and pressure, I’ll be your calm.
+Your safe place.
+The person you can come to when you need a breath, a break, or just silence.
+
+4. Pillar of Motivation
+
+I’ll push you forward when you question yourself.
+I’ll remind you why you started.
+I’ll stand beside you until the day you finally write “CA” before your name — because you will.
+
+You’re not just studying for a degree…
+You’re building your future, your identity, your pride.
+
+And I promise — no matter how hard it gets —
+I’ll be here, holding you up, standing behind you, and walking with you through every chapter of this CA journey.
+
+You’re strong.
+You’re capable.
+You’re unstoppable.
+And I believe in you more than you know. 💙
+
+I hope this making you feel motivated.this took me time to make. Hope u feel good and loved. 
+&
+&
+This to Apologize for the things which made u feel that i am not doing anything with my heart .But everthing i have and will do is with my heart for you.
+I Love You and Always will do . 
+`;
+
+const poemText = `
+🌙✨ A Poem From My Heart ✨🌙
+
+I know I’ve made mistakes,
+some so deep they may never be forgivable.
+And sometimes my behavior makes it look
+as if I’ve changed,
+as if I’ve become someone different
+from the one you once knew.
+
+But inside me…
+my love for you is the same,
+and it keeps growing every single day.
+It may seem like I’ve changed,
+but my heart has never shifted—
+not once, not ever.
+
+Yes, it is the rule of nature
+for human behavior to change,
+for seasons to turn,
+for people to evolve through time.
+But the emotions I carry for you,
+the love I hold in my heart—
+that is unchangeable, untouchable.
+Even if God Himself stood before me,
+that love would remain,
+steady and eternal.
+
+My love for you
+will never fade,
+never break,
+never change.
+It will always stay—
+pure, real, and only yours.
+
+This whole website is the result of days of my hard work. I know you are angry at me today, 
+and I finished working on this today. I know you told me not to say it… but please accept my apology. I truly am s***y.
+“I miss you every second, every minute, every hour, every single day. No matter what I’m doing or where I am, a part of me is always longing for you.”
+“I loved you every sec, min, hour, day, month, year… and I love you every sec, min, hour, day, month, year… and I will love you every sec, min, hour, day, month, year…
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
+😘🤗😘🤗😘🤗😘🤗😘🤗
+
+`;
+
 /* ---------- 3D Heart ---------- */
 const HeartMesh = () => {
   const meshRef = useRef();
@@ -95,18 +209,16 @@ const IntroOverlay = ({ onUnlock }) => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const audio = new Audio("/song1.mp3");
-      audio.loop = true;
-      audio.volume = 0.5;
-      audioRef.current = audio;
-    }
-    return () => audioRef.current?.pause();
+    const audio = new Audio("/song1.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+    audioRef.current = audio;
+    return () => audio.pause();
   }, []);
 
   useEffect(() => {
     const start = async () => {
-      try { await audioRef.current?.play(); } catch {}
+      try { await audioRef.current.play(); } catch {}
       setVisible(false);
       setTimeout(onUnlock, 650);
       window.removeEventListener("pointerdown", start);
@@ -152,7 +264,7 @@ const FloatingHeart = ({ x, size, emoji }) => (
   </motion.div>
 );
 
-/* ---------- Story Modal ---------- */
+/* ---------- Scrollable Story Modal ---------- */
 const StoryModal = ({ card, onClose }) => (
   <AnimatePresence>
     {card && (
@@ -168,7 +280,7 @@ const StoryModal = ({ card, onClose }) => (
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
-          className="max-w-md w-full bg-white rounded-2xl p-6 text-gray-800 shadow-xl"
+          className="max-w-md w-full bg-white rounded-2xl p-6 text-gray-800 shadow-xl max-h-[85vh] overflow-y-auto"
         >
           <h2
             className="text-3xl font-bold text-rose-700 mb-4"
@@ -190,7 +302,7 @@ const StoryModal = ({ card, onClose }) => (
   </AnimatePresence>
 );
 
-/* ---------- Timeline Card (tap-to-open, scrollable when open) ---------- */
+/* ---------- Timeline Card ---------- */
 const TimelineCard = ({ event, index, onOpen }) => {
   const [hearts, setHearts] = useState([]);
   const [open, setOpen] = useState(false);
@@ -204,16 +316,8 @@ const TimelineCard = ({ event, index, onOpen }) => {
   };
 
   const handleToggle = (e) => {
-    // prevent parent handlers when clicking inner controls
     e?.stopPropagation();
     setOpen((o) => !o);
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setOpen((o) => !o);
-    }
   };
 
   return (
@@ -225,22 +329,8 @@ const TimelineCard = ({ event, index, onOpen }) => {
       viewport={{ once: true }}
       onMouseEnter={spawnHeart}
       onTouchStart={spawnHeart}
-      onClick={handleToggle}
-      role="button"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      aria-expanded={open}
+      onClick={() => onOpen(event)}
     >
-      {LOVE_EMOJIS.slice(0, 6).map((em, i) => (
-        <FloatingEmoji
-          key={i}
-          emoji={em}
-          left={`${10 + i * 15}%`}
-          duration={6 + i * 3}
-          delay={i * 1.2}
-        />
-      ))}
-
       <div className="flex items-start justify-between">
         <div>
           <div className="text-sm text-rose-600 font-semibold">{event.date}</div>
@@ -251,35 +341,7 @@ const TimelineCard = ({ event, index, onOpen }) => {
             {event.title}
           </h3>
         </div>
-
-        {/* small indicator */}
-        <div className="ml-3 flex items-center">
-          <svg
-            className={`w-5 h-5 transform transition-transform ${open ? "rotate-180" : ""}`}
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden
-          >
-            <path fillRule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 011.414-1.414L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clipRule="evenodd" />
-          </svg>
-        </div>
       </div>
-
-      {/* description: shown when open and scrollable */}
-      {open && (
-        <div className="max-h-60 overflow-y-auto mt-3 pr-2">
-          <p className="text-sm text-gray-700 whitespace-pre-line">{event.desc}</p>
-
-          <div className="mt-3 flex justify-end">
-            <button
-              onClick={(e) => { e.stopPropagation(); onOpen(event); }}
-              className="px-3 py-1 text-sm rounded-full bg-rose-600 text-white hover:bg-rose-700"
-            >
-              View Full
-            </button>
-          </div>
-        </div>
-      )}
 
       {hearts.map((h) => (
         <FloatingHeart key={h.id} x={h.x} size={h.size} emoji={h.emoji} />
@@ -303,7 +365,7 @@ export default function App() {
         const id = Math.random().toString(36).slice(2);
         const emoji = LOVE_EMOJIS[Math.floor(Math.random() * LOVE_EMOJIS.length)];
         setCursorHearts((h) => [...h, { id, x, y, emoji }]);
-        setTimeout(() => setCursorHearts((h) => h.filter((c) => c.id !== id)), 1000);
+        setTimeout(() => setCursorHearts((h) => h.filter((c) => c.id !== id)), 800);
       };
       window.addEventListener("mousemove", addHeart);
       window.addEventListener("touchmove", addHeart);
@@ -315,18 +377,16 @@ export default function App() {
   }, [locked]);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = locked ? "hidden" : "auto";
-    }
+    document.body.style.overflow = locked ? "hidden" : "auto";
     return () => { document.body.style.overflow = "auto"; };
   }, [locked]);
 
   /* ---------- Timeline Events ---------- */
- const timeline = [
-  { 
-    date: "16 Aug",
-    title: "The First Glance",
-    desc: `💙 The First Glance — The Moment Everything Changed 💙
+  const timeline = [
+    { 
+      date: "16 Aug",
+      title: "The First Glance",
+      desc: `💙 The First Glance — The Moment Everything Changed 💙
 
 I still remember the 18th of August so clearly, as if it’s a memory carved into my heart forever. That was the day I saw you for the very first time — a moment that felt ordinary to the world but absolutely unforgettable to me.
 
@@ -341,23 +401,23 @@ It was as if all the definitions of beauty — grace, charm, cuteness, elegance,
 That first glance became the beginning of a story I didn’t even know I was ready for. A story filled with emotions, hopes, and moments I’d cherish forever.
 
 Sometimes, I still think about that day and smile, because I know that a single look at you in that blue shirt changed something inside me — something real, something lasting 💙..`
-  },
+    },
 
-  { 
-    date: "5 Sept",
-    title: "Our First Talk",
-    desc: `Then came 5th September, a day that felt just as special as the first time I saw you.
+    { 
+      date: "5 Sept",
+      title: "Our First Talk",
+      desc: `Then came 5th September, a day that felt just as special as the first time I saw you.
 That was the day I finally gathered the courage to speak to you — even if it was only a few words.
 
 It wasn’t a long conversation, just a small moment, a simple exchange… but for me, it meant so much. Those few words felt like a doorway opening, like the first step toward something beautiful.
 
 Your voice, your kindness, the way you replied — it stayed with me. Even that short conversation made my whole day feel brighter. It was small, but to me, it was everything. ❤️`
-  },
+    },
 
-  { 
-    date: "26 Sept",
-    title: "I Proposed",
-    desc: `Then came 26th September, the day my heart felt heavier than ever — but in the most beautiful way.
+    { 
+      date: "26 Sept",
+      title: "I Proposed",
+      desc: `Then came 26th September, the day my heart felt heavier than ever — but in the most beautiful way.
 For days, I had been noticing you — the way you smiled, the way you carried yourself, the little things that made you who you are. Every day I admired you from a respectful distance, quietly hoping you would someday understand what you meant to me.
 
 And on that day, I finally gathered all the courage inside me and confessed my feelings.
@@ -367,12 +427,12 @@ After speaking my heart, all I could do was wait…
 Waiting for your reply felt like waiting for my whole world to answer back. Each moment felt like days, each day felt like years — filled with hope, nervousness, and the soft fear of the unknown. But even in that uncertainty, there was a strange comfort… because at least you finally knew how I truly felt.
 
 That day wasn’t just a confession… it was the moment I chose honesty, courage, and love ❤️.`
-  },
+    },
 
-  { 
-    date: "29 Sept",
-    title: "You Said Yes",
-    desc: `29 September — the day you said yes to my proposal 💍❤️
+    { 
+      date: "29 Sept",
+      title: "You Said Yes",
+      desc: `29 September — the day you said yes to my proposal 💍❤️
 A day I will never forget. Those few days I spent waiting for your answer felt like years… every hour heavy with hope, every minute filled with love and fear.
 
 But when you finally said yes, everything inside me lit up. It felt like the world paused for a moment, just to let my heart breathe again.
@@ -381,12 +441,12 @@ That ‘yes’ didn’t just make me happy — it changed my life.
 It gave me a future to dream about, a reason to become better, and a love that feels like home.
 
 From that day onwards, everything became more meaningful, more beautiful, because it was with you. ❤️`
-  },
+    },
 
-  {
-    date: "Every Storm",
-    title: "Hardships We Faced",
-    desc: `💔 The Hardship We Faced — The Storms We Survived Together 💔
+    {
+      date: "Every Storm",
+      title: "Hardships We Faced",
+      desc: `💔 The Hardship We Faced — The Storms We Survived Together 💔
 
 Every love story has its beautiful moments, but ours also carried storms that tested our hearts in ways we never expected.
 We went through days when misunderstandings clouded our thoughts, when words hurt more than silence, and when distance felt heavier than miles.
@@ -404,12 +464,12 @@ The challenges we faced weren’t signs of weakness; they became proof of how st
 Because despite everything — the misunderstandings, the pain, the struggles — we still chose to hold on, to believe, and to keep fighting for what we had.
 
 And that is what makes our story real… and worth every moment. ❤️‍🩹`
-  },
+    },
 
-  {
-    date: "Last From The Date, But Never Late To Express",
-    title: "Special Message",
-    desc: `“I know it’s been almost two months since our anniversary.
+    {
+      date: "Last From The Date, But Never Late To Express",
+      title: "Special Message",
+      desc: `“I know it’s been almost two months since our anniversary.
 I’m late, and that’s because of me — but everything I’ve written here comes straight from my heart.”
 
 I don’t know what the future holds for us, but I want you to know one thing with absolute clarity: you are special to me, and you always will be.
@@ -440,19 +500,17 @@ Trying because what we have is worth fighting for.
 Trying because I don’t want to lose you.
 
 This is just a small part of my love for you.`
-  }
-];
+    }
+  ];
 
   return (
     <div className="min-h-screen text-gray-900">
       {locked && <IntroOverlay onUnlock={() => setLocked(false)} />}
 
-      {/* Hearts that follow the cursor/finger */}
       {cursorHearts.map((h) => (
         <CursorHeart key={h.id} x={h.x} y={h.y} emoji={h.emoji} />
       ))}
 
-      {/* Global floating emojis */}
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         {Array.from({ length: 18 }).map((_, i) => (
           <FloatingEmoji
@@ -465,14 +523,14 @@ This is just a small part of my love for you.`
         ))}
       </div>
 
-      <main className="relative">
+      <main>
         <section className="min-h-screen flex items-center justify-center py-20 px-6">
           <div className="max-w-3xl text-center">
             <h1
               className="text-4xl md:text-6xl font-extrabold"
               style={{ fontFamily: "Great Vibes, cursive" }}
             >
-             Happy 7th Anniversary ❤️ GUDIYA
+              Happy 7th Anniversary ❤️ GUDIYA
             </h1>
             <p className="mt-6 text-lg text-gray-700">
               A little page of love, memory, and soft encouragement.
@@ -481,161 +539,54 @@ This is just a small part of my love for you.`
         </section>
 
         <section className="py-24 px-6 bg-gradient-to-b from-rose-50 to-rose-100">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h2
-                className="text-3xl font-semibold mb-6"
-                style={{ fontFamily: "Great Vibes, cursive" }}
-              >
-                Our Timeline
-              </h2>
-              <div className="space-y-6">
-                {timeline.map((t, i) => (
-                  <TimelineCard
-                    key={t.date}
-                    event={t}
-                    index={i}
-                    onOpen={setSelectedCard}
-                  />
-                ))}
-              </div>
-            </div>
+
+          {/* TIMELINE FULL WIDTH */}
+          <div className="max-w-4xl mx-auto">
+            <h2
+              className="text-3xl font-semibold mb-6"
+              style={{ fontFamily: "Great Vibes, cursive" }}
+            >
+              Our Timeline
+            </h2>
 
             <div className="space-y-6">
-              <div className="timeline-card relative">
-                <h3
-                  className="text-2xl font-bold"
-                  style={{ fontFamily: "Great Vibes, cursive" }}
-                >
-                  Motivation
-                </h3>
-                <div className="mt-3 text-gray-800 whitespace-pre-line">
-                  {`
-                  💙 To the Strongest Girl I Know — My CA Warrior 💙
-
-I know the CA journey isn’t easy.
-It’s long… stressful… full of sleepless nights, endless revisions, pressure, and moments when it feels like the world is moving fast but you’re stuck between chapters, attempts, and expectations.
-
-But even through all of that, you’re still standing.
-You’re still fighting.
-You’re still giving your best.
-
-And I’m so proud of you.
-
-I’ve seen how hard you work, how much you sacrifice, how deeply you care about your dreams.
-Becoming a CA isn’t just a career… it’s a test of strength, discipline, and courage — and you have all of it within you.
-
-And in this journey, you are not alone.
-Because I am here — your four pillars, always.
-
-1. Pillar of Support
-
-Whenever you feel tired, stressed, or overwhelmed, lean on me.
-I’ll hold you up.
-I’ll make sure you never feel like giving up.
-
-2. Pillar of Strength
-
-When the syllabus feels endless or results shake your confidence, I’ll be the one reminding you of your power — the strength you sometimes forget you have.
-
-3. Pillar of Peace
-
-In the chaos of books, classes, and pressure, I’ll be your calm.
-Your safe place.
-The person you can come to when you need a breath, a break, or just silence.
-
-4. Pillar of Motivation
-
-I’ll push you forward when you question yourself.
-I’ll remind you why you started.
-I’ll stand beside you until the day you finally write “CA” before your name — because you will.
-
-You’re not just studying for a degree…
-You’re building your future, your identity, your pride.
-
-And I promise — no matter how hard it gets —
-I’ll be here, holding you up, standing behind you, and walking with you through every chapter of this CA journey.
-
-You’re strong.
-You’re capable.
-You’re unstoppable.
-And I believe in you more than you know. 💙
-
-
-
-
-                  
-                  I hope this making you feel motivated.this took me time to make. Hope u feel good and loved. 
-                  &
-                  &
-                       This to Apologize for the things which made u feel that i am not doing anything with my heart .But everthing i have and will do is with my heart for you.
-                  I Love You and Always will do . 
-                `}
-                </div>
-              </div>
-
-              <div className="timeline-card relative">
-                <h3
-                  className="text-2xl font-bold"
-                  style={{ fontFamily: "Great Vibes, cursive" }}
-                >
-                  Our Poem
-                </h3>
-                <div className="mt-3 text-gray-800 whitespace-pre-line">
-{`🌙✨ A Poem From My Heart ✨🌙
-
-I know I’ve made mistakes,
-some so deep they may never be forgivable.
-And sometimes my behavior makes it look
-as if I’ve changed,
-as if I’ve become someone different
-from the one you once knew.
-
-But inside me…
-my love for you is the same,
-and it keeps growing every single day.
-It may seem like I’ve changed,
-but my heart has never shifted—
-not once, not ever.
-
-Yes, it is the rule of nature
-for human behavior to change,
-for seasons to turn,
-for people to evolve through time.
-But the emotions I carry for you,
-the love I hold in my heart—
-that is unchangeable, untouchable.
-Even if God Himself stood before me,
-that love would remain,
-steady and eternal.
-
-My love for you
-will never fade,
-never break,
-never change.
-It will always stay—
-pure, real, and only yours.
-
-This whole website is the result of days of my hard work. I know you are angry at me today, 
-and I finished working on this today. I know you told me not to say it… but please accept my apology. I truly am s***y.
-“I miss you every second, every minute, every hour, every single day. No matter what I’m doing or where I am, a part of me is always longing for you.”
-“I loved you every sec, min, hour, day, month, year… and I love you every sec, min, hour, day, month, year… and I will love you every sec, min, hour, day, month, year…
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
-😘🤗😘🤗😘🤗😘🤗😘🤗
-
-`}
-                </div>
-              </div>
+              {timeline.map((t, i) => (
+                <TimelineCard
+                  key={i}
+                  event={t}
+                  index={i}
+                  onOpen={setSelectedCard}
+                />
+              ))}
             </div>
           </div>
+
+          {/* MOTIVATION CARD */}
+          <div className="max-w-4xl mx-auto mt-12">
+            <TimelineCard
+              event={{
+                date: "Motivation",
+                title: "You're My CA Warrior",
+                desc: motivationText,
+              }}
+              index={timeline.length}
+              onOpen={setSelectedCard}
+            />
+          </div>
+
+          {/* POEM CARD */}
+          <div className="max-w-4xl mx-auto mt-8">
+            <TimelineCard
+              event={{
+                date: "Poem",
+                title: "A Poem From My Heart",
+                desc: poemText,
+              }}
+              index={timeline.length + 1}
+              onOpen={setSelectedCard}
+            />
+          </div>
+
         </section>
 
         <footer className="py-12 px-6 text-center">
@@ -645,7 +596,6 @@ and I finished working on this today. I know you told me not to say it… but pl
         </footer>
       </main>
 
-      {/* Story Modal */}
       <StoryModal card={selectedCard} onClose={() => setSelectedCard(null)} />
     </div>
   );
