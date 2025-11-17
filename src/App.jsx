@@ -407,7 +407,7 @@ export default function App() {
       title: "The First Glance",
       desc: `💙 The First Glance — The Moment Everything Changed 💙
 
-I still remember the 18th of August so clearly, as if it’s a memory carved into my heart forever. That was the day I saw you for the very first time — a moment that felt ordinary to the world but absolutely unforgettable to me.
+I still remember the 16th of August so clearly, as if it’s a memory carved into my heart forever. That was the day I saw you for the very first time — a moment that felt ordinary to the world but absolutely unforgettable to me.
 
 You were standing there in your blue shirt 💙, and somehow that simple color made you look even more enchanting. I swear, for a few seconds, I forgot how to blink. Everything around me blurred, and all I could focus on was you. You looked so cute, so pure, so effortlessly beautiful that it felt like time paused just to let me admire you.
 
