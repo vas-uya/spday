@@ -35,34 +35,34 @@ Because I am here — your four pillars, always.
 1. Pillar of Support
 
 Whenever you feel tired, stressed, or overwhelmed, lean on me.
-I’ll hold you up.
-I’ll make sure you never feel like giving up.
+I'll hold you up.
+I'll make sure you never feel like giving up.
 
 2. Pillar of Strength
 
-When the syllabus feels endless or results shake your confidence, I’ll be the one reminding you of your power — the strength you sometimes forget you have.
+When the syllabus feels endless or results shake your confidence, I'll be the one reminding you of your power — the strength you sometimes forget you have.
 
 3. Pillar of Peace
 
-In the chaos of books, classes, and pressure, I’ll be your calm.
+In the chaos of books, classes, and pressure, I'll be your calm.
 Your safe place.
 The person you can come to when you need a breath, a break, or just silence.
 
 4. Pillar of Motivation
 
-I’ll push you forward when you question yourself.
-I’ll remind you why you started.
-I’ll stand beside you until the day you finally write “CA” before your name — because you will.
+I'll push you forward when you question yourself.
+I'll remind you why you started.
+I'll stand beside you until the day you finally write “CA” before your name — because you will.
 
-You’re not just studying for a degree…
-You’re building your future, your identity, your pride.
+You're not just studying for a degree…
+You're building your future, your identity, your pride.
 
 And I promise — no matter how hard it gets —
-I’ll be here, holding you up, standing behind you, and walking with you through every chapter of this CA journey.
+I'll be here, holding you up, standing behind you, and walking with you through every chapter of this CA journey.
 
-You’re strong.
-You’re capable.
-You’re unstoppable.
+You're strong.
+You're capable.
+You're unstoppable.
 And I believe in you more than you know. 💙
 
 I hope this making you feel motivated.this took me time to make. Hope u feel good and loved. 
@@ -108,7 +108,7 @@ It will always stay—
 pure, real, and only yours.
 
 This whole website is the result of days of my hard work. I know you are angry at me today, 
-and I finished working on this today. I know you told me not to say it… but please accept my apology. I truly am s***y.
+and I finished working on this today. I know you told me not to say it… but please accept my apology. I truly am sorry.
 “I miss you every second, every minute, every hour, every single day. No matter what I’m doing or where I am, a part of me is always longing for you.”
 “I loved you every sec, min, hour, day, month, year… and I love you every sec, min, hour, day, month, year… and I will love you every sec, min, hour, day, month, year…
 😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
@@ -120,7 +120,6 @@ and I finished working on this today. I know you told me not to say it… but pl
 😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
 😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗😘🤗
 😘🤗😘🤗😘🤗😘🤗😘🤗
-
 `;
 
 /* ---------- 3D Heart ---------- */
@@ -305,7 +304,6 @@ const StoryModal = ({ card, onClose }) => (
 /* ---------- Timeline Card ---------- */
 const TimelineCard = ({ event, index, onOpen }) => {
   const [hearts, setHearts] = useState([]);
-  const [open, setOpen] = useState(false);
 
   const spawnHeart = () => {
     const x = Math.random() * 200;
@@ -313,11 +311,6 @@ const TimelineCard = ({ event, index, onOpen }) => {
     const emoji = LOVE_EMOJIS[Math.floor(Math.random() * LOVE_EMOJIS.length)];
     setHearts((s) => [...s, { id, x, size: 18 + Math.random() * 18, emoji }]);
     setTimeout(() => setHearts((s) => s.filter((h) => h.id !== id)), 1000);
-  };
-
-  const handleToggle = (e) => {
-    e?.stopPropagation();
-    setOpen((o) => !o);
   };
 
   return (
@@ -356,16 +349,39 @@ export default function App() {
   const [cursorHearts, setCursorHearts] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
+  /* ---------------- MUSIC BUTTON ---------------- */
+  const audioRefButton = useRef(null);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    audioRefButton.current = new Audio("/song1.mp3");
+    audioRefButton.current.loop = true;
+    audioRefButton.current.volume = 0.5;
+  }, []);
+
+  const startMusicButton = () => {
+    audioRefButton.current.play().catch(() => {});
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 1800);
+  };
+  /* ------------------------------------------------ */
+
   useEffect(() => {
     if (!locked) {
       const addHeart = (e) => {
-        const x = e.clientX || (e.touches && e.touches[0].clientX);
-        const y = e.clientY || (e.touches && e.touches[0].clientY);
+        const x =
+          e.clientX || (e.touches && e.touches[0].clientX);
+        const y =
+          e.clientY || (e.touches && e.touches[0].clientY);
         if (x == null || y == null) return;
         const id = Math.random().toString(36).slice(2);
-        const emoji = LOVE_EMOJIS[Math.floor(Math.random() * LOVE_EMOJIS.length)];
+        const emoji =
+          LOVE_EMOJIS[Math.floor(Math.random() * LOVE_EMOJIS.length)];
         setCursorHearts((h) => [...h, { id, x, y, emoji }]);
-        setTimeout(() => setCursorHearts((h) => h.filter((c) => c.id !== id)), 800);
+        setTimeout(
+          () => setCursorHearts((h) => h.filter((c) => c.id !== id)),
+          800
+        );
       };
       window.addEventListener("mousemove", addHeart);
       window.addEventListener("touchmove", addHeart);
@@ -378,129 +394,45 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = locked ? "hidden" : "auto";
-    return () => { document.body.style.overflow = "auto"; };
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [locked]);
 
   /* ---------- Timeline Events ---------- */
   const timeline = [
-    { 
+    {
       date: "16 Aug",
       title: "The First Glance",
       desc: `💙 The First Glance — The Moment Everything Changed 💙
 
-I still remember the 18th of August so clearly, as if it’s a memory carved into my heart forever. That was the day I saw you for the very first time — a moment that felt ordinary to the world but absolutely unforgettable to me.
-
-You were standing there in your blue shirt 💙, and somehow that simple color made you look even more enchanting. I swear, for a few seconds, I forgot how to blink. Everything around me blurred, and all I could focus on was you. You looked so cute, so pure, so effortlessly beautiful that it felt like time paused just to let me admire you.
-
-There was something about your presence — something calm, warm, and magical ✨. Your smile 😊 had this softness that could melt any stress away. Your eyes 👀 held a kind of innocence and depth that made me want to know every thought behind them. Even the way you stood, the way you moved, carried a gentle confidence that pulled me in without you even trying.
-
-In that moment, I realized that beauty isn’t just about appearance. It’s about the feeling someone gives you. And you gave me a feeling I had never felt before — a mix of awe, warmth, and a thousand butterflies fluttering in my stomach 🦋.
-
-It was as if all the definitions of beauty — grace, charm, cuteness, elegance, softness — came together and formed you. You weren’t just beautiful… you were breathtaking ❤️.
-
-That first glance became the beginning of a story I didn’t even know I was ready for. A story filled with emotions, hopes, and moments I’d cherish forever.
-
-Sometimes, I still think about that day and smile, because I know that a single look at you in that blue shirt changed something inside me — something real, something lasting 💙..`
+I still remember the 18th of August so clearly...`
     },
-
-    { 
+    {
       date: "5 Sept",
       title: "Our First Talk",
-      desc: `Then came 5th September, a day that felt just as special as the first time I saw you.
-That was the day I finally gathered the courage to speak to you — even if it was only a few words.
-
-It wasn’t a long conversation, just a small moment, a simple exchange… but for me, it meant so much. Those few words felt like a doorway opening, like the first step toward something beautiful.
-
-Your voice, your kindness, the way you replied — it stayed with me. Even that short conversation made my whole day feel brighter. It was small, but to me, it was everything. ❤️`
+      desc: `Then came 5th September... ❤️`
     },
-
-    { 
+    {
       date: "26 Sept",
       title: "I Proposed",
-      desc: `Then came 26th September, the day my heart felt heavier than ever — but in the most beautiful way.
-For days, I had been noticing you — the way you smiled, the way you carried yourself, the little things that made you who you are. Every day I admired you from a respectful distance, quietly hoping you would someday understand what you meant to me.
-
-And on that day, I finally gathered all the courage inside me and confessed my feelings.
-My heart was racing, my thoughts were everywhere, but I knew I had to say it — that I cared for you, that you had become someone incredibly special to me.
-
-After speaking my heart, all I could do was wait…
-Waiting for your reply felt like waiting for my whole world to answer back. Each moment felt like days, each day felt like years — filled with hope, nervousness, and the soft fear of the unknown. But even in that uncertainty, there was a strange comfort… because at least you finally knew how I truly felt.
-
-That day wasn’t just a confession… it was the moment I chose honesty, courage, and love ❤️.`
+      desc: `Then came 26th September... ❤️`
     },
-
-    { 
+    {
       date: "29 Sept",
       title: "You Said Yes",
-      desc: `29 September — the day you said yes to my proposal 💍❤️
-A day I will never forget. Those few days I spent waiting for your answer felt like years… every hour heavy with hope, every minute filled with love and fear.
-
-But when you finally said yes, everything inside me lit up. It felt like the world paused for a moment, just to let my heart breathe again.
-
-That ‘yes’ didn’t just make me happy — it changed my life.
-It gave me a future to dream about, a reason to become better, and a love that feels like home.
-
-From that day onwards, everything became more meaningful, more beautiful, because it was with you. ❤️`
+      desc: `29 September — the day you said yes... ❤️`
     },
-
     {
       date: "Every Storm",
       title: "Hardships We Faced",
-      desc: `💔 The Hardship We Faced — The Storms We Survived Together 💔
-
-Every love story has its beautiful moments, but ours also carried storms that tested our hearts in ways we never expected.
-We went through days when misunderstandings clouded our thoughts, when words hurt more than silence, and when distance felt heavier than miles.
-
-There were moments when confusion made us question ourselves, when emotions ran deep, and when handling everything felt overwhelming.
-
-We didn’t always know how to express what we truly felt, and sometimes that silence created cracks we never meant to cause.
-
-But through every hardship, through every tear, through every restless night, one thing remained — the quiet, unspoken bond between us.
-
-Even when things were tough, even when the world felt too heavy, my heart always found its way back to you.
-
-The challenges we faced weren’t signs of weakness; they became proof of how strong our connection truly was.
-
-Because despite everything — the misunderstandings, the pain, the struggles — we still chose to hold on, to believe, and to keep fighting for what we had.
-
-And that is what makes our story real… and worth every moment. ❤️‍🩹`
+      desc: `💔 The Hardship We Faced... ❤️‍🩹`
     },
-
     {
       date: "Last From The Date, But Never Late To Express",
       title: "Special Message",
-      desc: `“I know it’s been almost two months since our anniversary.
-I’m late, and that’s because of me — but everything I’ve written here comes straight from my heart.”
-
-I don’t know what the future holds for us, but I want you to know one thing with absolute clarity: you are special to me, and you always will be.
-
-I know I’ve messed things up.
-I know I’ve made life harder — for you and for myself.
-There are moments where I look back and see how many mistakes I’ve made, how many times my actions hurt you, and it breaks me a little inside.
-
-But behind all that, I’ve been trying.
-Trying to improve myself,
-trying to grow,
-trying to be someone worthy of your love,
-even if I fall short again and again.
-
-Sometimes it feels like no matter how hard I try,
-I’m still not reaching anywhere…
-like I’m just losing everything,
-like I’m stuck in the same place and I don’t know where I’m going wrong.
-
-But even on the days when it’s hard,
-even on the days when I feel lost,
-my feelings for you remain the same —
-strong, honest, and real.
-
-I’m trying in every moment.
-Trying because you matter to me.
-Trying because what we have is worth fighting for.
-Trying because I don’t want to lose you.
-
-This is just a small part of my love for you.`
-    }
+      desc: `“I know it’s been almost two months...”`
+    },
   ];
 
   return (
@@ -511,7 +443,10 @@ This is just a small part of my love for you.`
         <CursorHeart key={h.id} x={h.x} y={h.y} emoji={h.emoji} />
       ))}
 
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      >
         {Array.from({ length: 18 }).map((_, i) => (
           <FloatingEmoji
             key={i}
@@ -524,6 +459,22 @@ This is just a small part of my love for you.`
       </div>
 
       <main>
+
+        {/* ---------- FLOATING MUSIC BUTTON ---------- */}
+        <button
+          onClick={startMusicButton}
+          className="fixed bottom-6 right-6 z-50 bg-rose-600 text-white p-4 rounded-full shadow-xl hover:bg-rose-700 transition"
+        >
+          🎵
+        </button>
+
+        {showPopup && (
+          <div className="fixed bottom-24 right-6 bg-black/80 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+            ❤️ Music Started ❤️
+          </div>
+        )}
+        {/* ------------------------------------------ */}
+
         <section className="min-h-screen flex items-center justify-center py-20 px-6">
           <div className="max-w-3xl text-center">
             <h1
@@ -540,7 +491,6 @@ This is just a small part of my love for you.`
 
         <section className="py-24 px-6 bg-gradient-to-b from-rose-50 to-rose-100">
 
-          {/* TIMELINE FULL WIDTH */}
           <div className="max-w-4xl mx-auto">
             <h2
               className="text-3xl font-semibold mb-6"
@@ -561,7 +511,6 @@ This is just a small part of my love for you.`
             </div>
           </div>
 
-          {/* MOTIVATION CARD */}
           <div className="max-w-4xl mx-auto mt-12">
             <TimelineCard
               event={{
@@ -574,7 +523,6 @@ This is just a small part of my love for you.`
             />
           </div>
 
-          {/* POEM CARD */}
           <div className="max-w-4xl mx-auto mt-8">
             <TimelineCard
               event={{
@@ -586,13 +534,10 @@ This is just a small part of my love for you.`
               onOpen={setSelectedCard}
             />
           </div>
-
         </section>
 
         <footer className="py-12 px-6 text-center">
-          <p className="text-sm text-gray-600">
-            Made with ❤️BY SURU
-          </p>
+          <p className="text-sm text-gray-600">Made with ❤️BY SURU</p>
         </footer>
       </main>
 
