@@ -190,9 +190,10 @@ const StoryModal = ({ card, onClose }) => (
   </AnimatePresence>
 );
 
-/* ---------- Timeline Card ---------- */
+/* ---------- Timeline Card (tap-to-open, scrollable when open) ---------- */
 const TimelineCard = ({ event, index, onOpen }) => {
   const [hearts, setHearts] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const spawnHeart = () => {
     const x = Math.random() * 200;
@@ -202,16 +203,33 @@ const TimelineCard = ({ event, index, onOpen }) => {
     setTimeout(() => setHearts((s) => s.filter((h) => h.id !== id)), 1000);
   };
 
+  const handleToggle = (e) => {
+    // prevent parent handlers when clicking inner controls
+    e?.stopPropagation();
+    setOpen((o) => !o);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setOpen((o) => !o);
+    }
+  };
+
   return (
     <motion.div
-      className="timeline-card relative overflow-hidden cursor-pointer"
+      className="timeline-card relative overflow-hidden cursor-pointer bg-white/5 rounded-lg p-4"
       whileInView={{ opacity: 1, y: 0 }}
       initial={{ opacity: 0, y: 40 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.06 }}
       viewport={{ once: true }}
       onMouseEnter={spawnHeart}
       onTouchStart={spawnHeart}
-      onClick={() => onOpen(event)}
+      onClick={handleToggle}
+      role="button"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      aria-expanded={open}
     >
       {LOVE_EMOJIS.slice(0, 6).map((em, i) => (
         <FloatingEmoji
@@ -222,18 +240,46 @@ const TimelineCard = ({ event, index, onOpen }) => {
           delay={i * 1.2}
         />
       ))}
-      <div className="text-sm text-rose-600 font-semibold">{event.date}</div>
-      <h3
-        className="text-xl font-bold mt-1"
-        style={{ fontFamily: "Great Vibes, cursive" }}
-      >
-        {event.title}
-      </h3>
 
-      {/* Scrollable description area (keeps layout compact but readable) */}
-      <div className="max-h-40 overflow-y-auto mt-3 pr-2">
-        <p className="text-sm text-gray-700 whitespace-pre-line">{event.desc}</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="text-sm text-rose-600 font-semibold">{event.date}</div>
+          <h3
+            className="text-xl font-bold mt-1"
+            style={{ fontFamily: "Great Vibes, cursive" }}
+          >
+            {event.title}
+          </h3>
+        </div>
+
+        {/* small indicator */}
+        <div className="ml-3 flex items-center">
+          <svg
+            className={`w-5 h-5 transform transition-transform ${open ? "rotate-180" : ""}`}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden
+          >
+            <path fillRule="evenodd" d="M10 12a1 1 0 01-.707-.293l-4-4a1 1 0 011.414-1.414L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4A1 1 0 0110 12z" clipRule="evenodd" />
+          </svg>
+        </div>
       </div>
+
+      {/* description: shown when open and scrollable */}
+      {open && (
+        <div className="max-h-60 overflow-y-auto mt-3 pr-2">
+          <p className="text-sm text-gray-700 whitespace-pre-line">{event.desc}</p>
+
+          <div className="mt-3 flex justify-end">
+            <button
+              onClick={(e) => { e.stopPropagation(); onOpen(event); }}
+              className="px-3 py-1 text-sm rounded-full bg-rose-600 text-white hover:bg-rose-700"
+            >
+              View Full
+            </button>
+          </div>
+        </div>
+      )}
 
       {hearts.map((h) => (
         <FloatingHeart key={h.id} x={h.x} size={h.size} emoji={h.emoji} />
@@ -463,7 +509,8 @@ This is just a small part of my love for you.`
                 >
                   Motivation
                 </h3>
-                <p className="mt-3 text-gray-700">
+                <div className="mt-3 text-gray-800 whitespace-pre-line">
+                  {`
                   💙 To the Strongest Girl I Know — My CA Warrior 💙
 
 I know the CA journey isn’t easy.
@@ -523,7 +570,8 @@ And I believe in you more than you know. 💙
                   &
                        This to Apologize for the things which made u feel that i am not doing anything with my heart .But everthing i have and will do is with my heart for you.
                   I Love You and Always will do . 
-                </p>
+                `}
+                </div>
               </div>
 
               <div className="timeline-card relative">
