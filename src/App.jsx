@@ -270,11 +270,11 @@ export default function App() {
   }, [locked]);
 
   /* ---------- Timeline Events ---------- */
-  const timeline = [
-    { 
-      date: "16 Aug",
-      title: "The First Glance",
-      desc: "💙 The First Glance — The Moment Everything Changed 💙
+ const timeline = [
+  { 
+    date: "16 Aug",
+    title: "The First Glance",
+    desc: `💙 The First Glance — The Moment Everything Changed 💙
 
 I still remember the 18th of August so clearly, as if it’s a memory carved into my heart forever. That was the day I saw you for the very first time — a moment that felt ordinary to the world but absolutely unforgettable to me.
 
@@ -288,22 +288,24 @@ It was as if all the definitions of beauty — grace, charm, cuteness, elegance,
 
 That first glance became the beginning of a story I didn’t even know I was ready for. A story filled with emotions, hopes, and moments I’d cherish forever.
 
-Sometimes, I still think about that day and smile, because I know that a single look at you in that blue shirt changed something inside me — something real, something lasting 💙.."
-    },
-    { 
-      date: "5 Sept",
-      title: "Our First Talk",
-      desc: "Then came 5th September, a day that felt just as special as the first time I saw you.
+Sometimes, I still think about that day and smile, because I know that a single look at you in that blue shirt changed something inside me — something real, something lasting 💙..`
+  },
+
+  { 
+    date: "5 Sept",
+    title: "Our First Talk",
+    desc: `Then came 5th September, a day that felt just as special as the first time I saw you.
 That was the day I finally gathered the courage to speak to you — even if it was only a few words.
 
 It wasn’t a long conversation, just a small moment, a simple exchange… but for me, it meant so much. Those few words felt like a doorway opening, like the first step toward something beautiful.
 
-your voice, your kindness, the way you replied — it stayed with me. Even that short conversation made my whole day feel brighter. It was small, but to me, it was everything. ❤️"
-    },
-    { 
-      date: "26 Sept",
-      title: "I Proposed",
-      desc: "Then came 26th September, the day my heart felt heavier than ever — but in the most beautiful way.
+Your voice, your kindness, the way you replied — it stayed with me. Even that short conversation made my whole day feel brighter. It was small, but to me, it was everything. ❤️`
+  },
+
+  { 
+    date: "26 Sept",
+    title: "I Proposed",
+    desc: `Then came 26th September, the day my heart felt heavier than ever — but in the most beautiful way.
 For days, I had been noticing you — the way you smiled, the way you carried yourself, the little things that made you who you are. Every day I admired you from a respectful distance, quietly hoping you would someday understand what you meant to me.
 
 And on that day, I finally gathered all the courage inside me and confessed my feelings.
@@ -312,12 +314,13 @@ My heart was racing, my thoughts were everywhere, but I knew I had to say it —
 After speaking my heart, all I could do was wait…
 Waiting for your reply felt like waiting for my whole world to answer back. Each moment felt like days, each day felt like years — filled with hope, nervousness, and the soft fear of the unknown. But even in that uncertainty, there was a strange comfort… because at least you finally knew how I truly felt.
 
-That day wasn’t just a confession… it was the moment I chose honesty, courage, and love ❤️."
-    },
-    { 
-      date: "29 Sept",
-      title: "You Said Yes",
-      desc: "29 September — the day you said yes to my proposal 💍❤️
+That day wasn’t just a confession… it was the moment I chose honesty, courage, and love ❤️.`
+  },
+
+  { 
+    date: "29 Sept",
+    title: "You Said Yes",
+    desc: `29 September — the day you said yes to my proposal 💍❤️
 A day I will never forget. Those few days I spent waiting for your answer felt like years… every hour heavy with hope, every minute filled with love and fear.
 
 But when you finally said yes, everything inside me lit up. It felt like the world paused for a moment, just to let my heart breathe again.
@@ -325,27 +328,36 @@ But when you finally said yes, everything inside me lit up. It felt like the wor
 That ‘yes’ didn’t just make me happy — it changed my life.
 It gave me a future to dream about, a reason to become better, and a love that feels like home.
 
-From that day onwards, everything became more meaningful, more beautiful, because it was with you. ❤️"
-    },
-    {
-      date: "Every Storm",
-      title: "Hardships We Faced",
-      desc: "💔 The Hardship We Faced — The Storms We Survived Together 💔
+From that day onwards, everything became more meaningful, more beautiful, because it was with you. ❤️`
+  },
+
+  {
+    date: "Every Storm",
+    title: "Hardships We Faced",
+    desc: `💔 The Hardship We Faced — The Storms We Survived Together 💔
 
 Every love story has its beautiful moments, but ours also carried storms that tested our hearts in ways we never expected.
-  We went through days when misunderstandings clouded our thoughts, when words hurt more than silence, and when distance felt heavier than miles. 
-  There were moments when confusion made us question ourselves, when emotions ran deep, and when handling everything felt overwhelming.
-  We didn’t always know how to express what we truly felt, and sometimes that silence created cracks we never meant to cause. 
-  But through every hardship, through every tear, through every restless night, one thing remained — the quiet, unspoken bond between us. 
-  Even when things were tough, even when the world felt too heavy, my heart always found its way back to you.'
-  The challenges we faced weren’t signs of weakness; they became proof of how strong our connection truly was. 
-  Because despite everything — the misunderstandings, the pain, the struggles — we still chose to hold on, to believe, and to keep fighting for what we had.
-  And that is what makes our story real… and worth every moment. ❤️‍🩹"
-    },
-    {
-      date: "Last From The Date, But Never Late To Express",
-      title: "Special Message",
-      desc: "“I know it’s been almost two months since our anniversary.
+We went through days when misunderstandings clouded our thoughts, when words hurt more than silence, and when distance felt heavier than miles.
+
+There were moments when confusion made us question ourselves, when emotions ran deep, and when handling everything felt overwhelming.
+
+We didn’t always know how to express what we truly felt, and sometimes that silence created cracks we never meant to cause.
+
+But through every hardship, through every tear, through every restless night, one thing remained — the quiet, unspoken bond between us.
+
+Even when things were tough, even when the world felt too heavy, my heart always found its way back to you.
+
+The challenges we faced weren’t signs of weakness; they became proof of how strong our connection truly was.
+
+Because despite everything — the misunderstandings, the pain, the struggles — we still chose to hold on, to believe, and to keep fighting for what we had.
+
+And that is what makes our story real… and worth every moment. ❤️‍🩹`
+  },
+
+  {
+    date: "Last From The Date, But Never Late To Express",
+    title: "Special Message",
+    desc: `“I know it’s been almost two months since our anniversary.
 I’m late, and that’s because of me — but everything I’ve written here comes straight from my heart.”
 
 I don’t know what the future holds for us, but I want you to know one thing with absolute clarity: you are special to me, and you always will be.
@@ -375,11 +387,9 @@ Trying because you matter to me.
 Trying because what we have is worth fighting for.
 Trying because I don’t want to lose you.
 
-  This is a just small part of my Love for you.
-      
-      "
-    }
-  ];
+This is just a small part of my love for you.`
+  }
+];
 
   return (
     <div className="min-h-screen text-gray-900">
